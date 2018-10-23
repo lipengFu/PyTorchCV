@@ -79,6 +79,7 @@ class FCClassifier(object):
             inputs, labels = self.module_utilizer.to_device(inputs, labels)
             # Forward pass.
             outputs = self.cls_net(inputs)
+            outputs = self.module_utilizer.gather(outputs)
             # Compute the loss of the train batch & backward.
 
             loss = self.ce_loss(outputs, labels)
@@ -128,9 +129,9 @@ class FCClassifier(object):
                 inputs, labels = self.module_utilizer.to_device(inputs, labels)
                 # Forward pass.
                 outputs = self.cls_net(inputs)
+                outputs = self.module_utilizer.gather(outputs)
                 # Compute the loss of the val batch.
                 loss = self.ce_loss(outputs, labels)
-
                 self.cls_running_score.update(outputs, labels)
                 self.val_losses.update(loss.item(), inputs.size(0))
 

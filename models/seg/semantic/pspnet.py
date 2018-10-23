@@ -37,7 +37,6 @@ class PPMBilinearDeepsup(nn.Module):
         super(PPMBilinearDeepsup, self).__init__()
         pool_scales = (1, 2, 3, 6)
         self.ppm = []
-        from extensions.layers.syncbn.module import BatchNorm2d
         for scale in pool_scales:
             self.ppm.append(nn.Sequential(
                 nn.AdaptiveAvgPool2d(scale),
@@ -115,12 +114,12 @@ class PSPNet(nn.Sequential):
         x, aux = self.decoder([x, aux])
         x = F.upsample(x, scale_factor=8, mode="bilinear", align_corners=True)
 
-        return tuple([x, aux])
+        return x, aux
 
 
 if __name__ == '__main__':
     i = torch.Tensor(1,3,512,512).cuda()
-    model = SyncBNPSPNet(num_classes=19).cuda()
+    model = PSPNet(num_classes=19).cuda()
     model.eval()
     o, _ = model(i)
     #print(o.size())

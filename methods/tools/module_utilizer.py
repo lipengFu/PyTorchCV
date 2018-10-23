@@ -193,17 +193,20 @@ class ModuleUtilizer(object):
             if p.requires_grad:
                 p.grad.mul_(norm)
 
-    def gather(self, outputs, target_device_index=0, dim=0):
+    def gather(self, outputs, target_device=None, dim=0):
         r"""
         Gathers tensors from different GPUs on a specified device
           (-1 means the CPU).
         """
-        if isinstance(outputs, torch.Tensor):
-            return outputs
+        if self.configer.get('network', 'bn_type') == 'syncbn':
+            if target_device is None:
+                target_device = list(range(torch.cuda.device_count()))[0]
+
+            return torch_gather(outputs, target_device, dim=dim)
 
         else:
-            gpu_list = self.configer.get('gpu')
-            return torch_gather(outputs, gpu_list[target_device_index], dim=dim)
+            assert isinstance(outputs, torch.Tensor)
+            return outputs
 
 
 

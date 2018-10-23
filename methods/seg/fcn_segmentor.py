@@ -63,9 +63,6 @@ class FCNSegmentor(object):
 
         self.pixel_loss = self.seg_loss_manager.get_seg_loss('fcn_seg_loss')
 
-        if self.configer.get('network', 'bn_type') == 'syncbn':
-            self.pixel_loss = DataParallelCriterion(self.pixel_loss).cuda()
-
     def _get_parameters(self):
         lr_1 = []
         lr_10 = []
@@ -100,6 +97,7 @@ class FCNSegmentor(object):
 
             # Forward pass.
             outputs = self.seg_net(inputs)
+            outputs = self.module_utilizer.gather(outputs)
 
             # Compute the loss of the train batch & backward.
             loss = self.pixel_loss(outputs, targets)
@@ -150,10 +148,10 @@ class FCNSegmentor(object):
                 inputs, targets = self.module_utilizer.to_device(inputs, targets)
                 # Forward pass.
                 outputs = self.seg_net(inputs)
+                outputs = self.module_utilizer.gather(outputs)
                 # Compute the loss of the val batch.
                 loss = self.pixel_loss(outputs, targets)
 
-                outputs = self.module_utilizer.gather(outputs)
                 pred = outputs[0]
 
             self.val_losses.update(loss.item(), inputs.size(0))
