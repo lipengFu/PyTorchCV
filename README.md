@@ -1,13 +1,14 @@
 # PyTorchCV: A PyTorch-Based Framework for Deep Learning in Computer Vision
 ```
 @misc{CV2018,
-  author =       {Donny You},
+  author =       {Donny You & SIGAI (www.sigai.cn)},
   howpublished = {\url{https://github.com/CVBox/PyTorchCV}},
   year =         {2018}
 }
 ```
 
 This repository provides source code for some deep learning based cv problems. We'll do our best to keep this repository up to date.  If you do find a problem about this repository, please raise it as an issue. We will fix it immediately.
+Sponsored by SIGAI, aiming to develop AI framework for Everyone. Please visit [www.sigai.cn](www.sigai.cn)
 
 
 ## Implemented Papers
