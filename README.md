@@ -9,7 +9,10 @@
 
 &ensp;&ensp;This repository provides source code for some deep learning based cv problems. We'll do our best to keep this repository up to date.  If you do find a problem about this repository, please raise it as an issue. We will fix it immediately.
 
-&ensp;&ensp;Sponsored by SIGAI, aiming to develop AI framework for Everyone. Please visit [www.sigai.cn](www.sigai.cn)
+&ensp;&ensp;SIGAI, aiming to develop AI framework for Everyone. Please visit [www.sigai.cn](www.sigai.cn)
+<div align="center">
+<img src="docs/_static/sigai.png" width="300px"/>
+</div>
 
 
 ## Implemented Papers
