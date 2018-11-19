@@ -1,9 +1,9 @@
 .. Encoding documentation master file
 
-:github_url: https://github.com/youansheng/PyTorchCV
+:github_url: https://github.com/CVBox/PyTorchCV
 
-Docs for PyTorch-Based CV Framework.
-========================
+Docs for PyTorchCV.
+===================
 
 Created by `Donny You <personal link>`_
 
@@ -18,12 +18,16 @@ segmentation, pose estimation, and so on.
    :caption: Notes
 
    notes/install.rst
+   notes/intro.rst
 
 .. toctree::
    :maxdepth: 1
    :caption: Experiments
 
-   experiments/*
+   experiments/cls.rst
+   experiments/det.rst
+   experiments/seg.rst
+   experiments/pose.rst
 
 .. toctree::
    :glob:
